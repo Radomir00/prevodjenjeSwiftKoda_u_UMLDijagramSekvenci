@@ -1,0 +1,14 @@
+@startuml
+autonumber
+autoactivate on
+skinparam ArrowThickness 1
+skinparam ParticipantPadding 20
+title Sequence: sample.swift
+participant ViewController
+participant Service
+participant Console
+create Service
+ViewController -> Service : <<create>> s = Service()
+ViewController -> Service : fetch
+Global -> Console : print
+@enduml
