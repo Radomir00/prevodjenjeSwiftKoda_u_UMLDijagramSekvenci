@@ -1,0 +1,22 @@
+@startuml
+title Sequence: controller_Service_Repository
+hide footbox
+autonumber
+skinparam ParticipantPadding 8
+skinparam BoxPadding 8
+skinparam ArrowThickness 1
+skinparam SequenceMessageAlign center
+participant Service as "Service"
+participant Repository as "Repository"
+participant Controller as "Controller"
+participant System as "System"
+create Repository
+Service -> Repository ++ : <<create>> repo = Repository()
+Service -> Repository : fetch(id:id)
+create Service
+Controller -> Service ++ : <<create>> s = Service()
+Controller -> Service : getUser(id:42)
+create Controller
+System -> Controller ++ : <<create>> c = Controller()
+System -> Controller : run()
+@enduml

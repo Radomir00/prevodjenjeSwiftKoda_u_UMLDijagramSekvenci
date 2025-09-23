@@ -1,0 +1,22 @@
+@startuml
+title Sequence: if_else
+hide footbox
+autonumber
+skinparam ParticipantPadding 8
+skinparam BoxPadding 8
+skinparam ArrowThickness 1
+skinparam SequenceMessageAlign center
+participant Checkout as "Checkout"
+participant Card as "Card"
+participant PayPal as "PayPal"
+participant System as "System"
+create Card
+Checkout -> Card ++ : <<create>> c = Card()
+Checkout -> Card : pay(amount:100)
+create PayPal
+Checkout -> PayPal ++ : <<create>> p = PayPal()
+Checkout -> PayPal : pay(amount:100)
+create Checkout
+System -> Checkout ++ : <<create>> ch = Checkout()
+System -> Checkout : doPay(useCard:true)
+@enduml

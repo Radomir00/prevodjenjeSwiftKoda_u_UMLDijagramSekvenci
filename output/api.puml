@@ -1,0 +1,22 @@
+@startuml
+title Sequence: api
+hide footbox
+autonumber
+skinparam ParticipantPadding 8
+skinparam BoxPadding 8
+skinparam ArrowThickness 1
+skinparam SequenceMessageAlign center
+participant Api as "Api"
+participant Network as "Network"
+participant App as "App"
+participant System as "System"
+create Network
+Api -> Network ++ : <<create>> net = Network()
+Api -> Network : request(path:"/users")
+create Api
+App -> Api ++ : <<create>> api = Api()
+App -> Api : getUsers()
+create App
+System -> App ++ : <<create>> app = App()
+System -> App : start()
+@enduml

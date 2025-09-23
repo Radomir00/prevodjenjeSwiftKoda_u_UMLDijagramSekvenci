@@ -1,62 +1,74 @@
-﻿import os
+﻿# src/main.py
+import os
 import sys
+import glob
 from antlr4 import FileStream, CommonTokenStream
-from .antlr_gen.SwiftLexer import SwiftLexer
-from .antlr_gen.SwiftParser import SwiftParser
+from src.antlr_gen.SwiftLexer import SwiftLexer
+from src.antlr_gen.SwiftParser import SwiftParser
+from src.seq_collector import SeqCollector
+from src.uml_generator import to_plantuml, generate_uml_image
+from src.semantic_analyzer import SemanticAnalyzer   # uključena semantika
 
-from .semantic_analyzer import SemanticAnalyzer
-from .seq_collector import SeqCollector
-from .uml_generator import to_plantuml, generate_uml_image
+EXAMPLES_DIR = "examples"
+OUTPUT_DIR = "output"
 
-INPUT_FOLDER = "examples"
-OUTPUT_FOLDER = "output"
+def iter_inputs(args):
+    if not args:
+        yield from sorted(glob.glob(os.path.join(EXAMPLES_DIR, "*.swift")))
+        return
+    for a in args:
+        if os.path.isdir(a):
+            yield from sorted(glob.glob(os.path.join(a, "*.swift")))
+        else:
+            if not os.path.isfile(a):
+                cand = os.path.join(EXAMPLES_DIR, a)
+                a = cand if os.path.isfile(cand) else a
+            if os.path.isfile(a):
+                yield a
+            else:
+                print(f"[WARN] Preskačem, ne postoji: {a}")
 
-def _resolve_input_path(fname: str) -> str:
-    if os.path.isfile(fname):
-        return fname
-    return os.path.join(INPUT_FOLDER, fname)
+def _parse_with_start_rule(parser):
+    for name in ["compilationUnit", "sourceFile", "file", "program", "start", "unit", "topLevel"]:
+        fn = getattr(parser, name, None)
+        if callable(fn):
+            return fn()
+    raise RuntimeError(f"Nema start pravila u SwiftParser-u. Pravila: {getattr(type(parser), 'ruleNames', [])}")
 
-def parse_swift_file(filename: str) -> str | None:
-    input_stream = FileStream(filename, encoding="utf-8")
+def process_swift_file(path: str) -> None:
+    input_stream = FileStream(path, encoding="utf-8")
     lexer = SwiftLexer(input_stream)
-    stream = CommonTokenStream(lexer)
-    parser = SwiftParser(stream)
-    tree = parser.program()
+    tokens = CommonTokenStream(lexer)
+    parser = SwiftParser(tokens)
+    tree = _parse_with_start_rule(parser)
 
+    # SEMANTIČKA ANALIZA – samo ispisuje greške
     analyzer = SemanticAnalyzer()
     errors = analyzer.analyze(tree)
     if errors:
-        print("\n".join(errors))
-        return None
+        print(f"[SEMANTIKA] Upozorenja/greške u: {path}")
+        for e in errors:
+            print(" -", e)
 
-    visitor = SeqCollector()
-    visitor.visit(tree)
+    # Kolekcija sekvenci
+    collector = SeqCollector()
+    collector.visit(tree)
 
-    uml_inner = to_plantuml(visitor.events, title=f"Sequence: {os.path.basename(filename)}")
-    return uml_inner
+    # Render
+    base = os.path.splitext(os.path.basename(path))[0]
+    uml_inner = to_plantuml(collector.events, title=f"Sequence: {base}")
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    generate_uml_image(uml_inner, base_name=base, output_folder=OUTPUT_DIR)
 
-def main():
-    if len(sys.argv) < 2:
-        print("Ispravno: python -m src.main file1.swift [file2.swift ...]")
-        sys.exit(1)
-
-    os.makedirs(OUTPUT_FOLDER, exist_ok=True)
-
-    for arg in sys.argv[1:]:
-        input_path = _resolve_input_path(arg)
-        if not os.path.isfile(input_path):
-            print(f"[UPOZORENJE] Ne postoji fajl: {input_path}")
-            continue
-
-        base_name = os.path.splitext(os.path.basename(input_path))[0]
-        print(f"Generišem dijagram za: {input_path}")
-
-        uml_inner = parse_swift_file(input_path)
-        if uml_inner is None:
-            print(f"Preskačem '{input_path}' (semantičke greške).\n")
-            continue
-
-        generate_uml_image(uml_inner, base_name, output_folder=OUTPUT_FOLDER)
+def main(argv):
+    inputs = list(iter_inputs(argv[1:]))
+    if not inputs:
+        print(f"Nema ulaza. Stavi .swift fajlove u '{EXAMPLES_DIR}/' ili prosledi putanje.")
+        return 1
+    for p in inputs:
+        print(f"Generišem dijagram za: {p}")
+        process_swift_file(p)
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main(sys.argv))

@@ -1,0 +1,14 @@
+@startuml
+title Sequence: test
+hide footbox
+autonumber
+skinparam ParticipantPadding 8
+skinparam BoxPadding 8
+skinparam ArrowThickness 1
+skinparam SequenceMessageAlign center
+participant System as "System"
+participant Greeter as "Greeter"
+create Greeter
+System -> Greeter ++ : <<create>> g = Greeter()
+System -> Greeter : hello(name:"Ana")
+@enduml

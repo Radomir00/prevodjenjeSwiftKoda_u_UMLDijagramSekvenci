@@ -2,197 +2,191 @@ parser grammar SwiftParser;
 
 options { tokenVocab=SwiftLexer; }
 
-program
-  : (declOrStmt)* EOF
+compilationUnit
+  : topLevelDecl* EOF
   ;
 
-declOrStmt
-  : importStmt
-  | classDecl
-  | extensionDecl
+topLevelDecl
+  : importDecl
+  | typeDecl
   | funcDecl
-  | statement
+  | varDecl
+  | stmt
   ;
 
-importStmt
-  : IMPORT IDENT (DOT IDENT)* SEMI?
+importDecl
+  : IMPORT importPath
+  ;
+importPath
+  : IDENT (DOT IDENT)*
   ;
 
-// --- Declarations ---
-classDecl
-  : CLASS IDENT LBRACE member* RBRACE SEMI?
+// ---- Types: class/struct/enum/protocol ----
+typeDecl
+  : (CLASS | STRUCT | ENUM | PROTOCOL | EXTENSION) IDENT typeBody
   ;
-
-extensionDecl
-  : EXTENSION IDENT LBRACE member* RBRACE
+typeBody
+  : LBRACE typeMember* RBRACE
   ;
-
-member
+typeMember
   : funcDecl
+  | initDecl
   | varDecl
-  | statement
+  | stmt
   ;
 
+// ---- Func / Init ----
 funcDecl
-  : (STATIC)? FUNC IDENT LPAREN parameterList? RPAREN
-    (THROWS | RETHROWS)? (ARROW type)?
-    block
+  : FUNC IDENT paramClause returnClause? block
+  ;
+initDecl
+  : INIT paramClause block
   ;
 
-parameterList
-  : parameter (COMMA parameter)*
+paramClause
+  : LPAREN paramList? RPAREN
+  ;
+paramList
+  : param (COMMA param)*
+  ;
+param
+  : (IDENT COLON)? typeRef (ASSIGN expr)?   // dozvolimo default
   ;
 
-parameter
-  : IDENT (COLON type)?
+returnClause
+  : ARROW typeRef
   ;
 
-// zadržavamo tip jednostavno (IDENT)
-type
-  : IDENT
+typeRef
+  : IDENT (DOT IDENT)* typeSuffix*
+  ;
+typeSuffix
+  : QUESTION             // opcionalni tip: T?
+  | LBRACK RBRACK        // npr. T[]
   ;
 
-// --- Empty / no-op statement ---
-emptyStmt
-  : SEMI
-  ;
-
-// --- Statements ---
-statement
-  : emptyStmt
-  | varDecl
-  | assignStmt
-  | returnStmt
-  | breakStmt
-  | continueStmt
-  | throwStmt
-  | ifStmt
-  | whileStmt
-  | repeatStmt
-  | forInStmt
-  | doCatchStmt
-  | switchStmt
-  | exprStatement
-  | block
-  ;
-
-block
-  : LBRACE statement* RBRACE
-  ;
-
+// ---- Vars (top-level ili u tipu) ----
 varDecl
-  : (LET | VAR) IDENT (COLON type)? (ASSIGN expression)? SEMI?
+  : (LET | VAR) pattern (COLON typeRef)? (ASSIGN expr)? SEMI?
   ;
-
-assignStmt
-  : IDENT ASSIGN expression SEMI?
-  ;
-
-returnStmt
-  : RETURN expression? SEMI?
-  ;
-
-breakStmt
-  : BREAK SEMI?
-  ;
-
-continueStmt
-  : CONTINUE SEMI?
-  ;
-
-throwStmt
-  : THROW expression SEMI?
-  ;
-
-// if (expr) { } | if expr { }
-ifStmt
-  : IF (LPAREN expression RPAREN | expression) block (ELSE block)?
-  ;
-
-// while (expr) { } | while expr { }
-whileStmt
-  : WHILE (LPAREN expression RPAREN | expression) block
-  ;
-
-// repeat { } while (expr) | repeat { } while expr
-repeatStmt
-  : REPEAT block WHILE (LPAREN expression RPAREN | expression) SEMI?
-  ;
-
-// for pattern in (range|expr) { }   (bez zagrada)
-forInStmt
-  : FOR pattern IN (rangeLiteral | expression) block
-  ;
-
 pattern
   : IDENT
   ;
 
-rangeLiteral
-  : expression RANGE_CLOSED expression
-  | expression RANGE_HALFOPEN expression
+// ---- Blocks & statements ----
+block
+  : LBRACE stmt* RBRACE
   ;
 
-doCatchStmt
-  : DO block (CATCH block)+
+stmt
+  : ifStmt
+  | returnStmt
+  | exprStmt
+  | varDecl
+  | block
   ;
 
-// switch (expr) { ... } | switch expr { ... }
-switchStmt
-  : SWITCH (LPAREN expression RPAREN | expression) LBRACE caseClause* defaultClause? RBRACE
+ifStmt
+  : IF expr block (ELSE (block | ifStmt))?
   ;
 
-caseClause
-  : CASE expression COLON statement*
+returnStmt
+  : RETURN expr? SEMI?
   ;
 
-defaultClause
-  : DEFAULT COLON statement*
+exprStmt
+  : expr SEMI?
   ;
 
-exprStatement
-  : expression SEMI?
+// ---- Expressions (subset sa jasnim fokusom na pozive) ----
+// Gruba, ali praktična hijerarhija:
+expr
+  : assignExpr
   ;
 
-// --- Expressions ---
-expression
-  : TRY expression                           # tryExpr
-  | postfixExpr                              # postfixOnly
+assignExpr
+  : conditionalExpr (ASSIGN assignExpr)?    // right-assoc
+  ;
+
+conditionalExpr
+  : logicalOrExpr                            // (?: …) izostavljamo – nije nam kritično
+  ;
+
+logicalOrExpr
+  : logicalAndExpr (OR_OR logicalAndExpr)*
+  ;
+
+logicalAndExpr
+  : equalityExpr (AND_AND equalityExpr)*
+  ;
+
+equalityExpr
+  : relationalExpr ((EQ | NEQ) relationalExpr)*
+  ;
+
+relationalExpr
+  : additiveExpr ((LT | LE | GT | GE) additiveExpr)*
+  ;
+
+additiveExpr
+  : multiplicativeExpr ((PLUS | MINUS) multiplicativeExpr)*
+  ;
+
+multiplicativeExpr
+  : unaryExpr ((STAR | DIV | MOD) unaryExpr)*
+  ;
+
+unaryExpr
+  : (NOT | MINUS | PLUS)? postfixExpr
   ;
 
 postfixExpr
-  : primary (postfixSuffix)*
+  : primaryExpr postfixOp*
   ;
 
-postfixSuffix
-  : callSuffix
-  | memberAccess
-  ;
-
-callSuffix
-  : LPAREN argumentList? RPAREN
+postfixOp
+  : memberAccess
+  | callSuffix
+  | optionalChain
   ;
 
 memberAccess
-  : (DOT | SAFE_NAV) IDENT (callSuffix)?
+  : DOT IDENT
   ;
 
-argumentList
-  : expression (COMMA expression)*
+optionalChain
+  : OPTIONAL_CHAIN IDENT?                    // a?.b  ili  a?.
   ;
 
-primary
+callSuffix
+  : LPAREN argList? RPAREN
+  ;
+
+argList
+  : arg (COMMA arg)*
+  ;
+arg
+  : (IDENT COLON)? expr
+  ;
+
+// ---- Primaries ----
+primaryExpr
   : literal
-  | IDENT
   | SELF
   | SUPER
-  | LPAREN expression RPAREN
+  | IDENT
+  | LPAREN expr RPAREN
+  | collectionLiteral
+  ;
+
+collectionLiteral
+  : LBRACK (expr (COMMA expr)*)? RBRACK
   ;
 
 literal
-  : INT
+  : STRING
+  | INT
   | FLOAT
-  | STRING
   | TRUE
   | FALSE
   | NIL

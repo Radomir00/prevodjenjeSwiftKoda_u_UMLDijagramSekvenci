@@ -1,4 +1,4 @@
-# Generated from SwiftParser.g4 by ANTLR 4.13.2
+# Generated from grammar/SwiftParser.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .SwiftParser import SwiftParser
@@ -8,57 +8,66 @@ else:
 # This class defines a complete listener for a parse tree produced by SwiftParser.
 class SwiftParserListener(ParseTreeListener):
 
-    # Enter a parse tree produced by SwiftParser#program.
-    def enterProgram(self, ctx:SwiftParser.ProgramContext):
+    # Enter a parse tree produced by SwiftParser#compilationUnit.
+    def enterCompilationUnit(self, ctx:SwiftParser.CompilationUnitContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#program.
-    def exitProgram(self, ctx:SwiftParser.ProgramContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#declOrStmt.
-    def enterDeclOrStmt(self, ctx:SwiftParser.DeclOrStmtContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#declOrStmt.
-    def exitDeclOrStmt(self, ctx:SwiftParser.DeclOrStmtContext):
+    # Exit a parse tree produced by SwiftParser#compilationUnit.
+    def exitCompilationUnit(self, ctx:SwiftParser.CompilationUnitContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#importStmt.
-    def enterImportStmt(self, ctx:SwiftParser.ImportStmtContext):
+    # Enter a parse tree produced by SwiftParser#topLevelDecl.
+    def enterTopLevelDecl(self, ctx:SwiftParser.TopLevelDeclContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#importStmt.
-    def exitImportStmt(self, ctx:SwiftParser.ImportStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#classDecl.
-    def enterClassDecl(self, ctx:SwiftParser.ClassDeclContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#classDecl.
-    def exitClassDecl(self, ctx:SwiftParser.ClassDeclContext):
+    # Exit a parse tree produced by SwiftParser#topLevelDecl.
+    def exitTopLevelDecl(self, ctx:SwiftParser.TopLevelDeclContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#extensionDecl.
-    def enterExtensionDecl(self, ctx:SwiftParser.ExtensionDeclContext):
+    # Enter a parse tree produced by SwiftParser#importDecl.
+    def enterImportDecl(self, ctx:SwiftParser.ImportDeclContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#extensionDecl.
-    def exitExtensionDecl(self, ctx:SwiftParser.ExtensionDeclContext):
+    # Exit a parse tree produced by SwiftParser#importDecl.
+    def exitImportDecl(self, ctx:SwiftParser.ImportDeclContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#member.
-    def enterMember(self, ctx:SwiftParser.MemberContext):
+    # Enter a parse tree produced by SwiftParser#importPath.
+    def enterImportPath(self, ctx:SwiftParser.ImportPathContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#member.
-    def exitMember(self, ctx:SwiftParser.MemberContext):
+    # Exit a parse tree produced by SwiftParser#importPath.
+    def exitImportPath(self, ctx:SwiftParser.ImportPathContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#typeDecl.
+    def enterTypeDecl(self, ctx:SwiftParser.TypeDeclContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#typeDecl.
+    def exitTypeDecl(self, ctx:SwiftParser.TypeDeclContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#typeBody.
+    def enterTypeBody(self, ctx:SwiftParser.TypeBodyContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#typeBody.
+    def exitTypeBody(self, ctx:SwiftParser.TypeBodyContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#typeMember.
+    def enterTypeMember(self, ctx:SwiftParser.TypeMemberContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#typeMember.
+    def exitTypeMember(self, ctx:SwiftParser.TypeMemberContext):
         pass
 
 
@@ -71,57 +80,66 @@ class SwiftParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#parameterList.
-    def enterParameterList(self, ctx:SwiftParser.ParameterListContext):
+    # Enter a parse tree produced by SwiftParser#initDecl.
+    def enterInitDecl(self, ctx:SwiftParser.InitDeclContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#parameterList.
-    def exitParameterList(self, ctx:SwiftParser.ParameterListContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#parameter.
-    def enterParameter(self, ctx:SwiftParser.ParameterContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#parameter.
-    def exitParameter(self, ctx:SwiftParser.ParameterContext):
+    # Exit a parse tree produced by SwiftParser#initDecl.
+    def exitInitDecl(self, ctx:SwiftParser.InitDeclContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#type.
-    def enterType(self, ctx:SwiftParser.TypeContext):
+    # Enter a parse tree produced by SwiftParser#paramClause.
+    def enterParamClause(self, ctx:SwiftParser.ParamClauseContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#type.
-    def exitType(self, ctx:SwiftParser.TypeContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#emptyStmt.
-    def enterEmptyStmt(self, ctx:SwiftParser.EmptyStmtContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#emptyStmt.
-    def exitEmptyStmt(self, ctx:SwiftParser.EmptyStmtContext):
+    # Exit a parse tree produced by SwiftParser#paramClause.
+    def exitParamClause(self, ctx:SwiftParser.ParamClauseContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#statement.
-    def enterStatement(self, ctx:SwiftParser.StatementContext):
+    # Enter a parse tree produced by SwiftParser#paramList.
+    def enterParamList(self, ctx:SwiftParser.ParamListContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#statement.
-    def exitStatement(self, ctx:SwiftParser.StatementContext):
+    # Exit a parse tree produced by SwiftParser#paramList.
+    def exitParamList(self, ctx:SwiftParser.ParamListContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#block.
-    def enterBlock(self, ctx:SwiftParser.BlockContext):
+    # Enter a parse tree produced by SwiftParser#param.
+    def enterParam(self, ctx:SwiftParser.ParamContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#block.
-    def exitBlock(self, ctx:SwiftParser.BlockContext):
+    # Exit a parse tree produced by SwiftParser#param.
+    def exitParam(self, ctx:SwiftParser.ParamContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#returnClause.
+    def enterReturnClause(self, ctx:SwiftParser.ReturnClauseContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#returnClause.
+    def exitReturnClause(self, ctx:SwiftParser.ReturnClauseContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#typeRef.
+    def enterTypeRef(self, ctx:SwiftParser.TypeRefContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#typeRef.
+    def exitTypeRef(self, ctx:SwiftParser.TypeRefContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#typeSuffix.
+    def enterTypeSuffix(self, ctx:SwiftParser.TypeSuffixContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#typeSuffix.
+    def exitTypeSuffix(self, ctx:SwiftParser.TypeSuffixContext):
         pass
 
 
@@ -134,48 +152,30 @@ class SwiftParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#assignStmt.
-    def enterAssignStmt(self, ctx:SwiftParser.AssignStmtContext):
+    # Enter a parse tree produced by SwiftParser#pattern.
+    def enterPattern(self, ctx:SwiftParser.PatternContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#assignStmt.
-    def exitAssignStmt(self, ctx:SwiftParser.AssignStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#returnStmt.
-    def enterReturnStmt(self, ctx:SwiftParser.ReturnStmtContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#returnStmt.
-    def exitReturnStmt(self, ctx:SwiftParser.ReturnStmtContext):
+    # Exit a parse tree produced by SwiftParser#pattern.
+    def exitPattern(self, ctx:SwiftParser.PatternContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#breakStmt.
-    def enterBreakStmt(self, ctx:SwiftParser.BreakStmtContext):
+    # Enter a parse tree produced by SwiftParser#block.
+    def enterBlock(self, ctx:SwiftParser.BlockContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#breakStmt.
-    def exitBreakStmt(self, ctx:SwiftParser.BreakStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#continueStmt.
-    def enterContinueStmt(self, ctx:SwiftParser.ContinueStmtContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#continueStmt.
-    def exitContinueStmt(self, ctx:SwiftParser.ContinueStmtContext):
+    # Exit a parse tree produced by SwiftParser#block.
+    def exitBlock(self, ctx:SwiftParser.BlockContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#throwStmt.
-    def enterThrowStmt(self, ctx:SwiftParser.ThrowStmtContext):
+    # Enter a parse tree produced by SwiftParser#stmt.
+    def enterStmt(self, ctx:SwiftParser.StmtContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#throwStmt.
-    def exitThrowStmt(self, ctx:SwiftParser.ThrowStmtContext):
+    # Exit a parse tree produced by SwiftParser#stmt.
+    def exitStmt(self, ctx:SwiftParser.StmtContext):
         pass
 
 
@@ -188,111 +188,111 @@ class SwiftParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#whileStmt.
-    def enterWhileStmt(self, ctx:SwiftParser.WhileStmtContext):
+    # Enter a parse tree produced by SwiftParser#returnStmt.
+    def enterReturnStmt(self, ctx:SwiftParser.ReturnStmtContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#whileStmt.
-    def exitWhileStmt(self, ctx:SwiftParser.WhileStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#repeatStmt.
-    def enterRepeatStmt(self, ctx:SwiftParser.RepeatStmtContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#repeatStmt.
-    def exitRepeatStmt(self, ctx:SwiftParser.RepeatStmtContext):
+    # Exit a parse tree produced by SwiftParser#returnStmt.
+    def exitReturnStmt(self, ctx:SwiftParser.ReturnStmtContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#forInStmt.
-    def enterForInStmt(self, ctx:SwiftParser.ForInStmtContext):
+    # Enter a parse tree produced by SwiftParser#exprStmt.
+    def enterExprStmt(self, ctx:SwiftParser.ExprStmtContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#forInStmt.
-    def exitForInStmt(self, ctx:SwiftParser.ForInStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#pattern.
-    def enterPattern(self, ctx:SwiftParser.PatternContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#pattern.
-    def exitPattern(self, ctx:SwiftParser.PatternContext):
+    # Exit a parse tree produced by SwiftParser#exprStmt.
+    def exitExprStmt(self, ctx:SwiftParser.ExprStmtContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#rangeLiteral.
-    def enterRangeLiteral(self, ctx:SwiftParser.RangeLiteralContext):
+    # Enter a parse tree produced by SwiftParser#expr.
+    def enterExpr(self, ctx:SwiftParser.ExprContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#rangeLiteral.
-    def exitRangeLiteral(self, ctx:SwiftParser.RangeLiteralContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#doCatchStmt.
-    def enterDoCatchStmt(self, ctx:SwiftParser.DoCatchStmtContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#doCatchStmt.
-    def exitDoCatchStmt(self, ctx:SwiftParser.DoCatchStmtContext):
+    # Exit a parse tree produced by SwiftParser#expr.
+    def exitExpr(self, ctx:SwiftParser.ExprContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#switchStmt.
-    def enterSwitchStmt(self, ctx:SwiftParser.SwitchStmtContext):
+    # Enter a parse tree produced by SwiftParser#assignExpr.
+    def enterAssignExpr(self, ctx:SwiftParser.AssignExprContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#switchStmt.
-    def exitSwitchStmt(self, ctx:SwiftParser.SwitchStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#caseClause.
-    def enterCaseClause(self, ctx:SwiftParser.CaseClauseContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#caseClause.
-    def exitCaseClause(self, ctx:SwiftParser.CaseClauseContext):
+    # Exit a parse tree produced by SwiftParser#assignExpr.
+    def exitAssignExpr(self, ctx:SwiftParser.AssignExprContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#defaultClause.
-    def enterDefaultClause(self, ctx:SwiftParser.DefaultClauseContext):
+    # Enter a parse tree produced by SwiftParser#conditionalExpr.
+    def enterConditionalExpr(self, ctx:SwiftParser.ConditionalExprContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#defaultClause.
-    def exitDefaultClause(self, ctx:SwiftParser.DefaultClauseContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#exprStatement.
-    def enterExprStatement(self, ctx:SwiftParser.ExprStatementContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#exprStatement.
-    def exitExprStatement(self, ctx:SwiftParser.ExprStatementContext):
+    # Exit a parse tree produced by SwiftParser#conditionalExpr.
+    def exitConditionalExpr(self, ctx:SwiftParser.ConditionalExprContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#tryExpr.
-    def enterTryExpr(self, ctx:SwiftParser.TryExprContext):
+    # Enter a parse tree produced by SwiftParser#logicalOrExpr.
+    def enterLogicalOrExpr(self, ctx:SwiftParser.LogicalOrExprContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#tryExpr.
-    def exitTryExpr(self, ctx:SwiftParser.TryExprContext):
+    # Exit a parse tree produced by SwiftParser#logicalOrExpr.
+    def exitLogicalOrExpr(self, ctx:SwiftParser.LogicalOrExprContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#postfixOnly.
-    def enterPostfixOnly(self, ctx:SwiftParser.PostfixOnlyContext):
+    # Enter a parse tree produced by SwiftParser#logicalAndExpr.
+    def enterLogicalAndExpr(self, ctx:SwiftParser.LogicalAndExprContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#postfixOnly.
-    def exitPostfixOnly(self, ctx:SwiftParser.PostfixOnlyContext):
+    # Exit a parse tree produced by SwiftParser#logicalAndExpr.
+    def exitLogicalAndExpr(self, ctx:SwiftParser.LogicalAndExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#equalityExpr.
+    def enterEqualityExpr(self, ctx:SwiftParser.EqualityExprContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#equalityExpr.
+    def exitEqualityExpr(self, ctx:SwiftParser.EqualityExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#relationalExpr.
+    def enterRelationalExpr(self, ctx:SwiftParser.RelationalExprContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#relationalExpr.
+    def exitRelationalExpr(self, ctx:SwiftParser.RelationalExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#additiveExpr.
+    def enterAdditiveExpr(self, ctx:SwiftParser.AdditiveExprContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#additiveExpr.
+    def exitAdditiveExpr(self, ctx:SwiftParser.AdditiveExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#multiplicativeExpr.
+    def enterMultiplicativeExpr(self, ctx:SwiftParser.MultiplicativeExprContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#multiplicativeExpr.
+    def exitMultiplicativeExpr(self, ctx:SwiftParser.MultiplicativeExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#unaryExpr.
+    def enterUnaryExpr(self, ctx:SwiftParser.UnaryExprContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#unaryExpr.
+    def exitUnaryExpr(self, ctx:SwiftParser.UnaryExprContext):
         pass
 
 
@@ -305,21 +305,12 @@ class SwiftParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#postfixSuffix.
-    def enterPostfixSuffix(self, ctx:SwiftParser.PostfixSuffixContext):
+    # Enter a parse tree produced by SwiftParser#postfixOp.
+    def enterPostfixOp(self, ctx:SwiftParser.PostfixOpContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#postfixSuffix.
-    def exitPostfixSuffix(self, ctx:SwiftParser.PostfixSuffixContext):
-        pass
-
-
-    # Enter a parse tree produced by SwiftParser#callSuffix.
-    def enterCallSuffix(self, ctx:SwiftParser.CallSuffixContext):
-        pass
-
-    # Exit a parse tree produced by SwiftParser#callSuffix.
-    def exitCallSuffix(self, ctx:SwiftParser.CallSuffixContext):
+    # Exit a parse tree produced by SwiftParser#postfixOp.
+    def exitPostfixOp(self, ctx:SwiftParser.PostfixOpContext):
         pass
 
 
@@ -332,21 +323,57 @@ class SwiftParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#argumentList.
-    def enterArgumentList(self, ctx:SwiftParser.ArgumentListContext):
+    # Enter a parse tree produced by SwiftParser#optionalChain.
+    def enterOptionalChain(self, ctx:SwiftParser.OptionalChainContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#argumentList.
-    def exitArgumentList(self, ctx:SwiftParser.ArgumentListContext):
+    # Exit a parse tree produced by SwiftParser#optionalChain.
+    def exitOptionalChain(self, ctx:SwiftParser.OptionalChainContext):
         pass
 
 
-    # Enter a parse tree produced by SwiftParser#primary.
-    def enterPrimary(self, ctx:SwiftParser.PrimaryContext):
+    # Enter a parse tree produced by SwiftParser#callSuffix.
+    def enterCallSuffix(self, ctx:SwiftParser.CallSuffixContext):
         pass
 
-    # Exit a parse tree produced by SwiftParser#primary.
-    def exitPrimary(self, ctx:SwiftParser.PrimaryContext):
+    # Exit a parse tree produced by SwiftParser#callSuffix.
+    def exitCallSuffix(self, ctx:SwiftParser.CallSuffixContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#argList.
+    def enterArgList(self, ctx:SwiftParser.ArgListContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#argList.
+    def exitArgList(self, ctx:SwiftParser.ArgListContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#arg.
+    def enterArg(self, ctx:SwiftParser.ArgContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#arg.
+    def exitArg(self, ctx:SwiftParser.ArgContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#primaryExpr.
+    def enterPrimaryExpr(self, ctx:SwiftParser.PrimaryExprContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#primaryExpr.
+    def exitPrimaryExpr(self, ctx:SwiftParser.PrimaryExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SwiftParser#collectionLiteral.
+    def enterCollectionLiteral(self, ctx:SwiftParser.CollectionLiteralContext):
+        pass
+
+    # Exit a parse tree produced by SwiftParser#collectionLiteral.
+    def exitCollectionLiteral(self, ctx:SwiftParser.CollectionLiteralContext):
         pass
 
 

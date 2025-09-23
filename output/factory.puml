@@ -1,0 +1,26 @@
+@startuml
+title Sequence: factory
+hide footbox
+autonumber
+skinparam ParticipantPadding 8
+skinparam BoxPadding 8
+skinparam ArrowThickness 1
+skinparam SequenceMessageAlign center
+participant Repo as "Repo"
+participant Logger as "Logger"
+participant Service as "Service"
+participant Controller as "Controller"
+participant System as "System"
+create Logger
+Repo -> Logger ++ : <<create>> log = Logger()
+Repo -> Logger : write(msg:"SELECT *")
+create Repo
+Service -> Repo ++ : <<create>> repo = Repo()
+Service -> Repo : findAll()
+create Service
+Controller -> Service ++ : <<create>> s = Service()
+Controller -> Service : list()
+create Controller
+System -> Controller ++ : <<create>> c = Controller()
+System -> Controller : run()
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+title Sequence: worker
+hide footbox
+autonumber
+skinparam ParticipantPadding 8
+skinparam BoxPadding 8
+skinparam ArrowThickness 1
+skinparam SequenceMessageAlign center
+participant Worker as "Worker"
+participant System as "System"
+Worker -> Worker : log()
+create Worker
+System -> Worker ++ : <<create>> w = Worker()
+System -> Worker : run()
+@enduml

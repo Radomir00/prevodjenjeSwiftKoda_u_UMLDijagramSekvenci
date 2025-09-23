@@ -1,5 +1,5 @@
 @startuml
-title Sequence: sample
+title Sequence: cache_service
 hide footbox
 autonumber
 skinparam ParticipantPadding 8
@@ -7,13 +7,13 @@ skinparam BoxPadding 8
 skinparam ArrowThickness 1
 skinparam SequenceMessageAlign center
 participant Controller as "Controller"
-participant AccountService as "AccountService"
+participant Cache_ as "Cache?"
+participant Service as "Service"
 participant System as "System"
-create AccountService
-Controller -> AccountService ++ : <<create>> svc = AccountService()
-Controller -> AccountService : withdraw(amount:100)
-Controller -> AccountService : withdraw(amount:1)
-Controller -> Controller : audit()
+Controller -> Cache_ : get(key:"u1")
+create Service
+Controller -> Service ++ : <<create>> s = Service()
+Controller -> Service : load(key:"u1")
 create Controller
 System -> Controller ++ : <<create>> c = Controller()
 System -> Controller : run()
