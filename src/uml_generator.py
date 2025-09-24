@@ -21,11 +21,6 @@ def _alias(name: str) -> str:
     return s
 
 def to_plantuml(events: Iterable, title: Optional[str] = None) -> str:
-    """
-    Pretvori listu događaja (sender, receiver, message, kind) u PlantUML tijelo.
-    - 'alias' je siguran token (bez ? i sl.), label je u navodnicima.
-    - 'Global' mapiramo u 'System' (ili promijeni po želji).
-    """
     participants_order, seen = [], set()
 
     def norm_name(n: str) -> str:
