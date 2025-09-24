@@ -12,7 +12,7 @@ def _find_plantuml_jar() -> Optional[str]:
             return c
     return None
 
-_ALIAS_CLEAN_RE = re.compile(r"[^A-Za-z0-9_\.]")  # strogo za alias
+_ALIAS_CLEAN_RE = re.compile(r"[^A-Za-z0-9_\.]") 
 def _alias(name: str) -> str:
     s = name or "Actor"
     s = _ALIAS_CLEAN_RE.sub("_", s)

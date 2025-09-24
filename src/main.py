@@ -1,5 +1,4 @@
-﻿# src/main.py
-import os
+﻿import os
 import sys
 import glob
 from antlr4 import FileStream, CommonTokenStream
@@ -7,7 +6,7 @@ from src.antlr_gen.SwiftLexer import SwiftLexer
 from src.antlr_gen.SwiftParser import SwiftParser
 from src.seq_collector import SeqCollector
 from src.uml_generator import to_plantuml, generate_uml_image
-from src.semantic_analyzer import SemanticAnalyzer   # uključena semantika
+from src.semantic_analyzer import SemanticAnalyzer  
 
 EXAMPLES_DIR = "examples"
 OUTPUT_DIR = "output"
@@ -42,7 +41,6 @@ def process_swift_file(path: str) -> None:
     parser = SwiftParser(tokens)
     tree = _parse_with_start_rule(parser)
 
-    # SEMANTIČKA ANALIZA – samo ispisuje greške
     analyzer = SemanticAnalyzer()
     errors = analyzer.analyze(tree)
     if errors:

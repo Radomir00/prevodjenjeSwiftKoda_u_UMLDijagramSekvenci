@@ -13,8 +13,8 @@ class SeqCollector(SwiftParserVisitor):
         super().__init__()
         self.classes = set()
         self.methods_by_class = {}
-        self.known_vars = {}          # imeVar -> Tip
-        self.current_owner = None     # "ClassName" kad smo u tijelu tipa
+        self.known_vars = {}     
+        self.current_owner = None    
         self.current_func = None
         self.events = []
 

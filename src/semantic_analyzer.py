@@ -1,6 +1,6 @@
 ﻿import re
 from antlr4 import ParseTreeWalker
-from src.antlr_gen.SwiftParserListener import SwiftParserListener  # generiše ga ANTLR
+from src.antlr_gen.SwiftParserListener import SwiftParserListener
 
 class SemanticAnalyzer(SwiftParserListener):
     def __init__(self):
